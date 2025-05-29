@@ -25,6 +25,7 @@
   "license": "MIT",
   "dependencies": {
     "@supabase/supabase-js": "^2.49.8",
+    "cheerio": "^1.0.0",
     "dotenv": "^16.5.0",
     "fastmcp": "^1.21.0",
     "rss-parser": "^3.13.0",

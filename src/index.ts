@@ -4,6 +4,7 @@ import { z } from 'zod';
 
 import { getRssSource, isRssUrl } from './lib/rss.js';
 import { getWebsiteSource, isWebsiteUrl } from './lib/website.js';
+import { getXSource, isXorTwitterUrl } from './lib/x.js';
 import { getYoutubeSource, isYoutubeUrl } from './lib/youtube.js';
 import { supabaseUtils } from './supabase.js';
 import { SourceType, SubmitSource } from './type.js';
@@ -28,6 +29,8 @@ server.addTool({
       source = await getRssSource(url);
     } else if (isYoutubeUrl(url)) {
       source = await getYoutubeSource(url);
+    } else if (isXorTwitterUrl(url)) {
+      source = await getXSource(url);
     }
     if (source) {
       await supabaseUtils.addSource(source);

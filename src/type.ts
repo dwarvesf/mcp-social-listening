@@ -17,6 +17,8 @@ export enum ProcessingStatus {
 export enum SourceType {
   Hiring = 'hiring',
   Newsletter = 'newsletter',
+  Profile = 'profile',
+  Repository = 'repository',
   Rss = 'rss',
 }
 
