@@ -2,6 +2,7 @@ import { Platform, SourceType, SubmitSource } from '../type.js';
 
 export async function getWebsiteSource(
   url: string,
+  type: SourceType = SourceType.Newsletter,
 ): Promise<null | SubmitSource> {
   const websiteTitle = await fetch(url)
     .then(response => response.text())
@@ -14,7 +15,7 @@ export async function getWebsiteSource(
   return {
     name: websiteTitle ?? '',
     platform: Platform.Website,
-    type: SourceType.Newsletter,
+    type: type,
     url: url,
   };
 }

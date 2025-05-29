@@ -6,7 +6,7 @@ import { getRssSource, isRssUrl } from './lib/rss.js';
 import { getWebsiteSource, isWebsiteUrl } from './lib/website.js';
 import { getYoutubeSource, isYoutubeUrl } from './lib/youtube.js';
 import { supabaseUtils } from './supabase.js';
-import { SubmitSource } from './type.js';
+import { SourceType, SubmitSource } from './type.js';
 
 const server = new FastMCP({
   name: 'social-listening',
@@ -14,28 +14,33 @@ const server = new FastMCP({
 });
 
 server.addTool({
-  description: 'Add new resources to the social listening system.',
+  description: 'Add a new resource to the social listening system.',
   execute: async args => {
     const url = args.url.trim();
-
+    const type = args.type.trim().toLowerCase();
     let source: null | SubmitSource = null;
 
-    if (isRssUrl(url)) {
+    if (type === 'newsletter' && isWebsiteUrl(url)) {
+      source = await getWebsiteSource(url, SourceType.Newsletter);
+    } else if (type === 'hiring') {
+      source = await getWebsiteSource(url, SourceType.Hiring);
+    } else if (isRssUrl(url)) {
       source = await getRssSource(url);
     } else if (isYoutubeUrl(url)) {
       source = await getYoutubeSource(url);
-    } else if (isWebsiteUrl(url)) {
-      source = await getWebsiteSource(url);
     }
     if (source) {
       await supabaseUtils.addSource(source);
-      return `Resource added successfully: ${source.url}`;
+      return `Source added successfully: ${source.url}`;
     }
 
-    return `Failed to add resource. Unsupported URL format: ${url}`;
+    return `Failed to add source. Unsupported URL format: ${url}`;
   },
-  name: 'add_new_resources_to_social_listening',
+  name: 'add_new_source_to_social_listening',
   parameters: z.object({
+    type: z
+      .nativeEnum(SourceType)
+      .describe('The type of the source, e.g., rss, newsletter, hiring'),
     url: z.string().url().min(1).describe('The URL'),
   }),
 });
