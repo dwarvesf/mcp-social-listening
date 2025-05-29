@@ -38,7 +38,7 @@ Follow the guide https://modelcontextprotocol.io/quickstart/user and add the fol
   "mcpServers": {
     "social-listening": {
       "command": "npx",
-      "args": ["-y", "@dwarvesf/mcp-social-listening"],
+      "args": ["-y", "@dwarvesf/mcp-social-listening@latest"],
       "env": {
         "SUPABASE_URL": "https://your-supabase-url.supabase.co",
         "SUPABASE_KEY": "your-supabase-key"
