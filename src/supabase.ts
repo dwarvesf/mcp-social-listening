@@ -1,7 +1,7 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { config } from 'dotenv';
 
-import { Source } from './type';
+import { Source } from './type.js';
 
 config();
 

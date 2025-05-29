@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { isValidYouTubeChannelUrl, isYoutubeUrl } from './youtube';
+import { isValidYouTubeChannelUrl, isYoutubeUrl } from './youtube.js';
 
 describe('isValidYouTubeChannelUrl', () => {
   it.each([

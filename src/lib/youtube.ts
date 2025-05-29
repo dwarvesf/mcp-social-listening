@@ -1,4 +1,4 @@
-import { Platform, SourceType, SubmitSource } from '../type';
+import { Platform, SourceType, SubmitSource } from '../type.js';
 
 export function isYoutubeUrl(url: string): boolean {
   const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;

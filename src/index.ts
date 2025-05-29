@@ -2,11 +2,11 @@
 import { FastMCP } from 'fastmcp';
 import { z } from 'zod';
 
-import { getRssSource, isRssUrl } from './lib/rss';
-import { getWebsiteSource, isWebsiteUrl } from './lib/website';
-import { getYoutubeSource, isYoutubeUrl } from './lib/youtube';
-import { supabaseUtils } from './supabase';
-import { SubmitSource } from './type';
+import { getRssSource, isRssUrl } from './lib/rss.js';
+import { getWebsiteSource, isWebsiteUrl } from './lib/website.js';
+import { getYoutubeSource, isYoutubeUrl } from './lib/youtube.js';
+import { supabaseUtils } from './supabase.js';
+import { SubmitSource } from './type.js';
 
 const server = new FastMCP({
   name: 'social-listening',

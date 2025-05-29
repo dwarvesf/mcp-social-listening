@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { isRssUrl } from './rss';
+import { isRssUrl } from './rss.js';
 
 describe('isRssUrl', () => {
   it('should return true for valid RSS URLs', () => {
