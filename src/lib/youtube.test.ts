@@ -1,6 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
-import { isValidYouTubeChannelUrl, isYoutubeUrl } from './youtube.js';
+import {
+  extractYoutubeHandle,
+  isValidYouTubeChannelUrl,
+  isYoutubeUrl,
+} from './youtube.js';
 
 describe('isValidYouTubeChannelUrl', () => {
   it.each([
@@ -49,5 +53,73 @@ describe('isYoutubeUrl', () => {
     );
     expect(isYoutubeUrl('')).toBe(false);
     expect(isYoutubeUrl('ftp://youtube.com/watch?v=dQw4w9WgXcQ')).toBe(false);
+  });
+});
+
+describe('extractYoutubeHandle', () => {
+  it('should return the handle when found in the HTML', () => {
+    const mockHtml = `
+      <head>
+        <meta property="og:url" content="https://www.youtube.com/channel/UC-lHJZR3Gqxm24_Vd_D_EZw">
+      </head>
+      <body>
+        <script>
+          var ytInitialData = {"ownerProfileUrl":"https://www.youtube.com/@testHandle"};
+        </script>
+      </body>
+    `;
+    const handle = extractYoutubeHandle(mockHtml);
+    expect(handle).toBe('testHandle');
+  });
+
+  it('should return null when the handle is not found in the HTML', () => {
+    const mockHtml = `
+      <head>
+        <meta property="og:url" content="https://www.youtube.com/channel/UC-lHJZR3Gqxm24_Vd_D_EZw">
+      </head>
+      <body>
+        <script>
+          var ytInitialData = {};
+        </script>
+      </body>
+    `;
+    const handle = extractYoutubeHandle(mockHtml);
+    expect(handle).toBeNull();
+  });
+
+  it('should return null when the HTML is empty or invalid', () => {
+    const mockHtml = '';
+    const handle = extractYoutubeHandle(mockHtml);
+    expect(handle).toBeNull();
+  });
+
+  it('should return the handle when the URL in ownerProfileUrl does not have www.', () => {
+    const mockHtml = `
+      <head>
+        <meta property="og:url" content="https://www.youtube.com/channel/UC-lHJZR3Gqxm24_Vd_D_EZw">
+      </head>
+      <body>
+        <script>
+          var ytInitialData = {"ownerProfileUrl":"https://youtube.com/@anotherHandle"};
+        </script>
+      </body>
+    `;
+    const handle = extractYoutubeHandle(mockHtml);
+    expect(handle).toBe('anotherHandle');
+  });
+
+  it('should return the handle when the URL in ownerProfileUrl does not have https://', () => {
+    const mockHtml = `
+      <head>
+        <meta property="og:url" content="https://www.youtube.com/channel/UC-lHJZR3Gqxm24_Vd_D_EZw">
+      </head>
+      <body>
+        <script>
+          var ytInitialData = {"ownerProfileUrl":"www.youtube.com/@yetAnotherHandle"};
+        </script>
+      </body>
+    `;
+    const handle = extractYoutubeHandle(mockHtml);
+    expect(handle).toBe('yetAnotherHandle');
   });
 });

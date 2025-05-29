@@ -17,7 +17,7 @@ server.addTool({
   description: 'Add a new resource to the social listening system.',
   execute: async args => {
     const url = args.url.trim();
-    const type = args.type.trim().toLowerCase();
+    const type = args.type?.trim().toLowerCase();
     let source: null | SubmitSource = null;
 
     if (type === 'newsletter' && isWebsiteUrl(url)) {
@@ -40,7 +40,8 @@ server.addTool({
   parameters: z.object({
     type: z
       .nativeEnum(SourceType)
-      .describe('The type of the source, e.g., rss, newsletter, hiring'),
+      .describe('The type of the source, e.g., rss, newsletter, hiring')
+      .optional(),
     url: z.string().url().min(1).describe('The URL'),
   }),
 });
