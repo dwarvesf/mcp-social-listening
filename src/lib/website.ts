@@ -44,6 +44,8 @@ export function isWebsiteUrl(url: string): boolean {
       'gitlab.com',
       'bitbucket.org',
       'stackoverflow.com',
+      'quora.com',
+      'wikipedia.org',
     ];
 
     for (const domain of platformDomains) {
