@@ -25,7 +25,7 @@ server.addTool({
       source = await getWebsiteSource(url, SourceType.Newsletter);
     } else if (type === 'hiring') {
       source = await getWebsiteSource(url, SourceType.Hiring);
-    } else if (isRssUrl(url)) {
+    } else if (isRssUrl(url) || type === 'rss') {
       source = await getRssSource(url);
     } else if (isYoutubeUrl(url)) {
       source = await getYoutubeSource(url);
