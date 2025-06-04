@@ -14,7 +14,7 @@ export async function getRssSource(url: string): Promise<null | SubmitSource> {
       name: feed.title,
       platform: Platform.Website,
       type: SourceType.Rss,
-      url: feed.link,
+      url,
     };
   });
 }
