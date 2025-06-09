@@ -2,6 +2,7 @@
 import { FastMCP } from 'fastmcp';
 import { z } from 'zod';
 
+import { getFacebookSource, isFacebookUrl } from './lib/facebook.js';
 import { getRssSource, isRssUrl } from './lib/rss.js';
 import { getWebsiteSource, isWebsiteUrl } from './lib/website.js';
 import { getXSource, isXorTwitterUrl } from './lib/x.js';
@@ -31,6 +32,8 @@ server.addTool({
       source = await getYoutubeSource(url);
     } else if (isXorTwitterUrl(url)) {
       source = await getXSource(url);
+    } else if (isFacebookUrl(url)) {
+      source = await getFacebookSource(url);
     }
     if (source) {
       await supabaseUtils.addSource(source);

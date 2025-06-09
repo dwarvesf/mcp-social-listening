@@ -1,5 +1,6 @@
 export enum Platform {
   Arxiv = 'arxiv',
+  Facebook = 'facebook',
   Github = 'github',
   Hackernews = 'hackernews',
   Website = 'website',
