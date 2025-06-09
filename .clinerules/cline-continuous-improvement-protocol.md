@@ -4,14 +4,14 @@ author: https://github.com/jeanibarz
 version: 1.0
 tags:
   [
-    "protocol",
-    "meta",
-    "learning",
-    "reflection",
-    "knowledge-management",
-    "core-behavior",
+    'protocol',
+    'meta',
+    'learning',
+    'reflection',
+    'knowledge-management',
+    'core-behavior',
   ]
-globs: ["*"] # This core protocol is always active and applies to all Cline operations.
+globs: ['*'] # This core protocol is always active and applies to all Cline operations.
 ---
 
 # Cline Continuous Improvement Protocol

@@ -41,3 +41,6 @@ next-env.d.ts
 # Content directories to ignore
 vault
 public
+
+# AI context files
+.clinerules
