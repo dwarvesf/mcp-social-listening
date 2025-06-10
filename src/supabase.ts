@@ -14,7 +14,10 @@ export class SupabaseUtils {
   }
 
   public async addSource(
-    source: Pick<Source, 'name' | 'platform' | 'type' | 'url'>,
+    source: Pick<
+      Source,
+      'category' | 'name' | 'platform' | 'region' | 'type' | 'url'
+    >,
   ): Promise<Source> {
     const { data, error } = await this.supabase
       .from('Source')

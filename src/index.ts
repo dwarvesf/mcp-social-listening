@@ -20,6 +20,11 @@ server.addTool({
   execute: async args => {
     const url = args.url.trim();
     const type = args.type?.trim().toLowerCase();
+    const category = args.category?.trim().toLowerCase() as
+      | Category
+      | undefined;
+    const region = args.region?.trim().toLowerCase() as Region | undefined;
+
     let source: null | SubmitSource = null;
 
     if (type === 'newsletter' && isWebsiteUrl(url)) {
@@ -36,7 +41,7 @@ server.addTool({
       source = await getFacebookSource(url);
     }
     if (source) {
-      await supabaseUtils.addSource(source);
+      await supabaseUtils.addSource({ ...source, category, region });
       return `Source added successfully: ${source.url}`;
     }
 
@@ -46,15 +51,21 @@ server.addTool({
   parameters: z.object({
     category: z
       .nativeEnum(Category)
-      .describe('The category of the source, e.g., ai, blockchain')
+      .describe(
+        'The category of the source, e.g., ai, blockchain. Only use this if the category is specifically mentioned.',
+      )
       .optional(),
     region: z
       .nativeEnum(Region)
-      .describe('The region of the source, e.g., us, eu, singapore, vietnam')
+      .describe(
+        'The region of the source, e.g., us, eu, singapore, vietnam. Only use this if the category is specifically mentioned.',
+      )
       .optional(),
     type: z
       .nativeEnum(SourceType)
-      .describe('The type of the source, e.g., rss, newsletter, hiring')
+      .describe(
+        'The type of the source, e.g., rss, newsletter, hiring. Only use this if the category is specifically mentioned.',
+      )
       .optional(),
     url: z.string().url().min(1).describe('The URL'),
   }),
