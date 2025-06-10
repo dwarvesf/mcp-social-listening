@@ -8,7 +8,7 @@ import { getWebsiteSource, isWebsiteUrl } from './lib/website.js';
 import { getXSource, isXorTwitterUrl } from './lib/x.js';
 import { getYoutubeSource, isYoutubeUrl } from './lib/youtube.js';
 import { supabaseUtils } from './supabase.js';
-import { SourceType, SubmitSource } from './type.js';
+import { Category, Region, SourceType, SubmitSource } from './type.js';
 
 const server = new FastMCP({
   name: 'social-listening',
@@ -44,6 +44,14 @@ server.addTool({
   },
   name: 'add_new_source_to_social_listening',
   parameters: z.object({
+    category: z
+      .nativeEnum(Category)
+      .describe('The category of the source, e.g., ai, blockchain')
+      .optional(),
+    region: z
+      .nativeEnum(Region)
+      .describe('The region of the source, e.g., us, eu, singapore, vietnam')
+      .optional(),
     type: z
       .nativeEnum(SourceType)
       .describe('The type of the source, e.g., rss, newsletter, hiring')
