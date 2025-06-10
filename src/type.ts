@@ -5,6 +5,7 @@ export enum Category {
   Funding = 'funding',
   Hiring = 'hiring',
   PlatformOps = 'platform-ops',
+  Product = 'product',
   Quant = 'quant',
 }
 
