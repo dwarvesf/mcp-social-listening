@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { getXAuthorFromUrl, isXorTwitterUrl } from './x';
+import { getXAuthorFromUrl, isXorTwitterUrl } from './x.js';
 
 describe('getXAuthorFromUrl', () => {
   it.each([

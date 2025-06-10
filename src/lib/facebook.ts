@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 
-import { Platform, SourceType, SubmitSource } from '../type';
+import { Platform, SourceType, SubmitSource } from '../type.js';
 
 export async function getFacebookSource(
   url: string,

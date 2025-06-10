@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { describe, expect, it, type Mock, vi } from 'vitest';
 
-import { Platform, SourceType } from '../type';
-import { getFacebookSource, isFacebookUrl } from './facebook';
+import { Platform, SourceType } from '../type.js';
+import { getFacebookSource, isFacebookUrl } from './facebook.js';
 
 // Mock axios and cheerio
 vi.mock('axios');
