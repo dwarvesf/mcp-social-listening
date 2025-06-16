@@ -44,6 +44,7 @@ export enum SourceType {
   Hiring = 'hiring',
   Newsletter = 'newsletter',
   Profile = 'profile',
+  Reddit = 'reddit',
   Repository = 'repository',
   Rss = 'rss',
   Webpage = 'webpage',
