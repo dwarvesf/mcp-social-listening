@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { Platform, SourceType } from '../type';
-import { getRedditSource, isRedditUrl } from './reddit';
+import { Platform, SourceType } from '../type.js';
+import { getRedditSource, isRedditUrl } from './reddit.js';
 
 describe('isRedditUrl', () => {
   it('should return true for a valid subreddit URL', () => {
