@@ -1,4 +1,4 @@
-import { Platform, SourceType, SubmitSource } from '../type';
+import { Platform, SourceType, SubmitSource } from '../type.js';
 
 export async function getRedditSource(url: string): Promise<SubmitSource> {
   return {
