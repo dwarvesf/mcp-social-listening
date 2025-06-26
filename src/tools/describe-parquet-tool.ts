@@ -16,7 +16,9 @@ export function addDescribeParquetTool(server: FastMCP) {
     execute: async () => {
       try {
         const result = await readProfileDB('SELECT username from Profiles');
-        return JSON.stringify(result, null, 2);
+        return result
+          .map((profile: Record<string, any>) => profile.username)
+          .join(', ');
       } catch (error: any) {
         return `Failed to describe Parquet table: ${error.message}`;
       }
