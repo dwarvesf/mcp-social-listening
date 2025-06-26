@@ -89,3 +89,9 @@ export interface SourceMetadata {
 }
 
 export type SubmitSource = Pick<Source, 'name' | 'platform' | 'type' | 'url'>;
+
+export enum MemberType {
+  Dwarves = 'dwarves',
+  Alumni = 'alumni',
+  Community = 'community',
+}
