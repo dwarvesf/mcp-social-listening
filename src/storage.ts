@@ -2,7 +2,7 @@
 import { Bucket, File, Storage } from '@google-cloud/storage';
 import { Buffer } from 'buffer';
 
-import { vaultUtils } from './vault';
+import { vaultUtils } from './vault.js';
 
 import 'dotenv/config';
 
