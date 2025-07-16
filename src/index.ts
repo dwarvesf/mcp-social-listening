@@ -1,16 +1,21 @@
 #!/usr/bin/env node
 import { FastMCP } from 'fastmcp';
 
-import { addNewResourceTool } from './tools/add-new-source.js';
-import { addDescribeParquetTool } from './tools/describe-parquet-tool.js';
+import { addSourceTools } from './tools/source.js';
+import { addProfileTools } from './tools/profile.js';
 
 const server = new FastMCP({
   name: 'social-listening',
   version: '1.0.0',
 });
 
-addNewResourceTool(server);
-addDescribeParquetTool(server);
+[addSourceTools, addProfileTools].forEach(tool => {
+  if (typeof tool === 'function') {
+    tool(server);
+  } else {
+    console.warn('Tool is not a function:', tool);
+  }
+});
 
 server.addResource({
   async load() {

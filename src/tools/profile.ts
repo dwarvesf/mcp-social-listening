@@ -9,10 +9,10 @@ import {
 import { MemberType } from '../type.js';
 import StorageUtil from '../storage.js';
 
-export function addDescribeParquetTool(server: FastMCP) {
+export function addProfileTools(server: FastMCP) {
   server.addTool({
-    name: 'list_usernames_from_contributors',
-    description: 'Lists all usernames from the contributors Parquet file.',
+    name: 'list_usernames_from_profiles',
+    description: 'Lists all usernames from the profiles Parquet file.',
     execute: async () => {
       try {
         const result = await readProfileDB('SELECT username from Profiles');
@@ -26,8 +26,8 @@ export function addDescribeParquetTool(server: FastMCP) {
   });
 
   server.addTool({
-    name: 'add_member_type_for_contributors',
-    description: 'Adds a member type for contributors in the Parquet file.',
+    name: 'add_member_type_for_profiles',
+    description: 'Adds a member type for profiles in the Parquet file.',
     parameters: z.object({
       member_usernames: z
         .array(z.string())
@@ -59,7 +59,7 @@ export function addDescribeParquetTool(server: FastMCP) {
         const dataBuffer = await writeParquetData(updatedProfiles);
 
         const storage = new StorageUtil();
-        await storage.storeData(dataBuffer, 'profiles/contributors.parquet');
+        await storage.storeData(dataBuffer, 'profiles/profiles.parquet');
 
         return `Successfully updated member types for ${JSON.stringify(profiles[0])} users.`;
       } catch (error: any) {

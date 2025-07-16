@@ -10,7 +10,7 @@ import { getYoutubeSource, isYoutubeUrl } from '../lib/youtube.js';
 import { supabaseUtils } from '../supabase.js';
 import { Category, Region, SourceType, SubmitSource } from '../type.js';
 
-export function addNewResourceTool(server: FastMCP) {
+export function addSourceTools(server: FastMCP) {
   server.addTool({
     description: 'Add a new resource to the social listening system.',
     execute: async args => {
