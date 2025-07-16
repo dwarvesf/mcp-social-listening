@@ -95,3 +95,11 @@ export enum MemberType {
   Alumni = 'alumni',
   Community = 'community',
 }
+
+export interface Profile {
+  profile_url: string;
+  username: string;
+  github_url: string;
+  linkedin_url?: string;
+  facebook_url: string;
+}

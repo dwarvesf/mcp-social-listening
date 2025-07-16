@@ -26,6 +26,57 @@ export function addProfileTools(server: FastMCP) {
   });
 
   server.addTool({
+    name: 'add_new_profile',
+    description: 'Adds a new profile to the Parquet file.',
+    parameters: z.object({
+      github_url: z.string().describe('GitHub profile URL'),
+      linkedin_url: z.string().describe('LinkedIn profile URL').optional(),
+      facebook_url: z.string().describe('Facebook profile URL').optional(),
+      type: z
+        .nativeEnum(MemberType)
+        .describe(
+          'The type of member to add (e.g., "dwarves", "alumni", "community").',
+        ),
+    }),
+    execute: async args => {
+      const { github_url, linkedin_url, facebook_url } = args;
+
+      try {
+        const profiles = await readProfileDBV2();
+        const newProfile = {
+          profile_url: github_url,
+          username: github_url.split('/').pop() || '',
+          github_url,
+          linkedin_url,
+          facebook_url,
+        };
+
+        // Check for duplicate profiles
+        const existingProfile = profiles.find(
+          (profile: Record<string, any>) =>
+            profile.github_url === github_url ||
+            profile.linkedin_url === linkedin_url ||
+            profile.facebook_url === facebook_url,
+        );
+
+        if (existingProfile) {
+          return `Profile already exists: ${JSON.stringify(existingProfile)}`;
+        }
+
+        profiles.push(newProfile);
+        const dataBuffer = await writeParquetData(profiles);
+
+        const storage = new StorageUtil();
+        await storage.storeData(dataBuffer, 'profiles/profiles.parquet');
+
+        return `Successfully added profile: ${JSON.stringify(newProfile)}`;
+      } catch (error: any) {
+        return `Failed to add profile: ${error.message}`;
+      }
+    },
+  });
+
+  server.addTool({
     name: 'add_member_type_for_profiles',
     description: 'Adds a member type for profiles in the Parquet file.',
     parameters: z.object({
@@ -35,7 +86,7 @@ export function addProfileTools(server: FastMCP) {
       type: z
         .nativeEnum(MemberType)
         .describe(
-          'The type of member to add (e.g., "contributor", "maintainer", "admin").',
+          'The type of member to add (e.g., "dwarves", "alumni", "community").',
         ),
     }),
     execute: async args => {
