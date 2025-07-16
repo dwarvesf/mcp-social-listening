@@ -67,7 +67,7 @@ export function addProfileTools(server: FastMCP) {
         const dataBuffer = await writeParquetData(profiles);
 
         const storage = new StorageUtil();
-        await storage.storeData(dataBuffer, 'profiles/profiles.parquet');
+        await storage.storeData(dataBuffer, 'profiles/contributors.parquet');
 
         return `Successfully added profile: ${JSON.stringify(newProfile)}`;
       } catch (error: any) {
@@ -110,7 +110,7 @@ export function addProfileTools(server: FastMCP) {
         const dataBuffer = await writeParquetData(updatedProfiles);
 
         const storage = new StorageUtil();
-        await storage.storeData(dataBuffer, 'profiles/profiles.parquet');
+        await storage.storeData(dataBuffer, 'profiles/contributors.parquet');
 
         return `Successfully updated member types for ${JSON.stringify(profiles[0])} users.`;
       } catch (error: any) {
