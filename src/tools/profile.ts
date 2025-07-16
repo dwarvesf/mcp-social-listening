@@ -49,6 +49,7 @@ export function addProfileTools(server: FastMCP) {
           github_url,
           linkedin_url,
           facebook_url,
+          member_type: args.type,
         };
 
         // Check for duplicate profiles
