@@ -102,4 +102,10 @@ export interface Profile {
   github_url: string;
   linkedin_url?: string;
   facebook_url: string;
+  github_crawl_status?: string;
+  github_extraction_error?: string;
+  github_crawled_at?: string;
+  github_metadata?: unknown;
+  linkedin_crawl_status?: string;
+  linkedin_metadata?: unknown;
 }
