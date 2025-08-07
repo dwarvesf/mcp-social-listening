@@ -44,3 +44,5 @@ public
 
 # AI context files
 .clinerules
+CLAUDE.md
+.claude
