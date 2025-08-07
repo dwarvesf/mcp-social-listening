@@ -2,6 +2,7 @@ import { FastMCP } from 'fastmcp';
 import { z } from 'zod';
 
 import { getFacebookSource, isFacebookUrl } from '../lib/facebook.js';
+import { getGithubSource, isGithubUrl } from '../lib/github.js';
 import { getRedditSource, isRedditUrl } from '../lib/reddit.js';
 import { getRssSource, isRssUrl } from '../lib/rss.js';
 import { getWebsiteSource, isWebsiteUrl } from '../lib/website.js';
@@ -37,6 +38,8 @@ export function addSourceTools(server: FastMCP) {
         source = await getFacebookSource(url);
       } else if (isRedditUrl(url)) {
         source = await getRedditSource(url);
+      } else if (isGithubUrl(url)) {
+        source = await getGithubSource(url);
       }
       if (source) {
         await supabaseUtils.addSource({ ...source, category, region });

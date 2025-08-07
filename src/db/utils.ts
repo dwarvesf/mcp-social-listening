@@ -17,7 +17,7 @@ const duckdbInstances: Map<string, DuckDBInstance> = new Map();
  * @param filePath The path to the parquet file
  * @returns The query result as an array of objects
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 export async function queryDuckDB<D extends Record<string, any>>(
   sql: string,
   options: { filePath: string; tableName: string },
